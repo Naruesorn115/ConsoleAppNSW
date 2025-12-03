@@ -1,24 +1,44 @@
-﻿using System;
+using System;
 
 class Program
 {
     static void Main()
     {
-        
-        Console.Write("Please enter your weight in kilograms: => ");
-        double weight = Convert.ToDouble(Console.ReadLine());
+        double weight;
+        double heightCm;
 
-        Console.Write("Please enter your height in centimeters: => ");
-        double heightCm = Convert.ToDouble(Console.ReadLine());
+        while (true)
+        {
+            Console.Write("Please enter your weight in kilograms: => ");
 
+            if (double.TryParse(Console.ReadLine(), out weight) && weight > 0 && weight < 500)
+            {
+                break; 
+            }
+            else
+            {
+                Console.WriteLine("Invalid weight! Please enter a valid number (1 - 500).");
+            }
+        }
+
+        while (true)
+        {
+            Console.Write("Please enter your height in centimeters: => ");
+
+            if (double.TryParse(Console.ReadLine(), out heightCm) && heightCm > 0 && heightCm < 300)
+            {
+                break;  
+            }
+            else
+            {
+                Console.WriteLine("Invalid height! Please enter a valid number (1 - 300).");
+            }
+        }
         double height = heightCm / 100;
-
         double bmi = weight / (height * height);
-
         Console.WriteLine($"\nYour BMI is: {bmi:0.00}");
 
         string category;
-
         if (bmi < 18.5)
             category = "Underweight";
         else if (bmi < 25)
@@ -27,7 +47,6 @@ class Program
             category = "Overweight";
         else
             category = "Obesity";
-
         Console.WriteLine("Category: " + category);
     }
 }
